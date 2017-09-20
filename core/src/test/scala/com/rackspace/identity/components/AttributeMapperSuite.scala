@@ -33,6 +33,12 @@ class AttributeMapperSuite extends AttributeMapperBase {
   val testDir = new File("src/test/resources/tests/mapping-tests")
   val tests : List[File] = testDir.listFiles.toList.filter(f=>f.isDirectory)
 
+  val mapResultsDir = { val d = new File("target/map-results")
+    d.mkdir
+    d
+  }
+
+
   def getMapsFromTest (test : File) : List[File] = new File(test, "maps").listFiles().toList.filter(f => {
     f.toString.endsWith("xml") || f.toString.endsWith("json") || f.toString.endsWith("yaml")})
   def getAssertsFromTest (test : File) : List[File] = new File(test, "asserts").listFiles().toList.filter(f => {f.toString.endsWith("xml")})
@@ -83,6 +89,38 @@ class AttributeMapperSuite extends AttributeMapperBase {
       true,
       true,
       v)
+
+    //
+    //  Output a result of the map format.  This will be use for
+    //  documentation and to generate reports.
+    //
+    val resultTestDir = {
+      val rt = new File (mapResultsDir, map.getParentFile.getParentFile.getName)
+      rt.mkdir
+      rt
+    }
+
+    val assertTestDir = {
+      val at = new File(resultTestDir, assertFile.getName)
+      at.mkdir
+      at
+    }
+
+    val resultFile = new File(assertTestDir, {
+      if (map.getName.endsWith(".yaml")) map.getName+".json" else map.getName
+    })
+
+    val resultSerializer = AttributeMapper.processor.newSerializer(resultFile)
+
+    AttributeMapper.convertAssertion (
+      new StreamSource(map),
+      PolicyFormat.withName(mapFormat),
+      new StreamSource(assertFile),
+      resultSerializer,
+      false,
+      true,
+      v)
+
     dest.getXdmNode.asSource
   })
 
