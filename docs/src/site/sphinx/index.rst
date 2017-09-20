@@ -10,11 +10,11 @@ Welcome to Attribute Mapping's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   intro
 
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
