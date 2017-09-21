@@ -15,6 +15,11 @@
     <description>Attribute Mapper core functionality</description>
 
     <build>
+        <resources>
+            <resource>
+                <directory>${project.build.directory}/docs</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
