@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xsl:stylesheet [
+<!ENTITY CR "&#x0A;">
+]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:rstd="http://www.rackspace.com/docs/rstd"
     xmlns:data="a"
     xmlns:u="u"
-    exclude-result-prefixes="xs data"
+    exclude-result-prefixes="xs data rstd"
     version="2.0">
     <xsl:import href="xml2rst-noexslt.xsl"/>
 
@@ -43,6 +47,13 @@
             <node name="line" indent="2"/>
         </data:lookup>
     </xsl:variable>
+    
+    <!-- Wrap the text in an element -->
+    <xsl:template match="/">
+        <wapper>
+            <xsl:apply-templates/>
+        </wapper>
+    </xsl:template>
 
     <!-- Do indent according to ancestor -->
     <xsl:template
@@ -99,9 +110,14 @@
         </xsl:for-each>
     </xsl:template>
 
-    <xsl:template match="/">
-        <wapper>
-            <xsl:apply-templates/>
-        </wapper>
+    <!-- Handle Directives -->
+    <xsl:template match="rstd:directive[rstd:raw]">
+        <xsl:text>&CR;</xsl:text>
+        <xsl:value-of select="rstd:raw"/>
+        <xsl:text>&CR;</xsl:text>
+    </xsl:template>
+    
+    <xsl:template match="rstd:directive[not(rstd:raw)]">
+        <xsl:message>Ignoring non raw directive <xsl:value-of select="@type"/></xsl:message>
     </xsl:template>
 </xsl:stylesheet>
