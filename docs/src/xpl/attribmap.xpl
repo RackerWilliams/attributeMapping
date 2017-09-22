@@ -16,6 +16,7 @@
                 <p:with-option name="args" select="concat('--no-doctype,',$fullName)"/>
             </p:exec>
             <p:filter select="c:result/element()"/>
+            <!--
             <p:xslt version="2.0">
                 <p:input port="stylesheet">
                     <p:document href="../xsl/xml2rst-wrapper.xsl"/>
@@ -24,6 +25,7 @@
                     <p:empty/>
                 </p:input>
             </p:xslt>
+            -->
         </p:for-each>
     </p:for-each>
     <p:wrap-sequence wrapper="c:result"/>
