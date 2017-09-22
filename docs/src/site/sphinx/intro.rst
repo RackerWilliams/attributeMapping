@@ -25,13 +25,17 @@ The following is example SAML:
 
 .. sidebar:: Resulting Attributes
 
-   ======  ========================
-   domain  323676
-   name    john.doe
-   email   no-reply@rackspace.com
-   roles   nova:admin
-   expire  2013-11-17T16:19:06.298Z
-   ======  ========================
+   +--------+---------------------------+
+   | domain | 32367                     |
+   +--------+---------------------------+
+   | name   | joe.doe                   |
+   +--------+---------------------------+
+   | email  | no-reply@rackspace.com    |
+   +--------+---------------------------+
+   | roles  | nova:admin                |
+   +--------+---------------------------+
+   | expire | 2013-11-17T16:19:06.298Z  |
+   +--------+---------------------------+
 
 .. highlight:: yaml
    :linenothreshold: 5
@@ -43,13 +47,17 @@ The following is example SAML:
 
 .. sidebar:: Resulting Attributes 2
 
-   ======  ========================
-   domain  323676
-   name    john.doe
-   email   no-reply@rackspace.com
-   roles   nova:admin
-   expire  2013-11-17T16:19:06.298Z
-   ======  ========================
+   +--------+---------------------------+
+   | domain | 32367                     |
+   +--------+---------------------------+
+   | name   | joe.doe                   |
+   +--------+---------------------------+
+   | email  | no-reply@rackspace.com    |
+   +--------+---------------------------+
+   | roles  | nova:admin                |
+   +--------+---------------------------+
+   | expire | 2013-11-17T16:19:06.298Z  |
+   +--------+---------------------------+
 
 .. literalinclude::
    ./../../../../core/src/test/resources/tests/mapping-tests/defaults/maps/defaults.yaml
