@@ -63,3 +63,23 @@ The following is example SAML:
    ./../../../../core/src/test/resources/tests/mapping-tests/defaults/maps/defaults.yaml
    :linenos:
    :caption: Default Policy
+
+.. empty:: Empty directive with arg
+
+
+.. empty2:: Empty directive with args
+
+    And some content. There as well as you can plainly see. There is
+    lots of conteent enougth that it can fill several lines worth of
+    text.
+
+    In fact there are several paragraphs here.
+
+.. empty3::
+
+   Just content please.
+
+.. empty4::  Here we have a super long
+   argument... it goes into the next line
+
+   But there is still body content.
