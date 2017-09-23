@@ -52,7 +52,7 @@
         <xsl:param name="argText" as="xs:string"/>
         <xsl:analyze-string select="$argText" regex="^\s*:(([A-Z]|[a-z]|[0-9]|-|_)*):(.*)$" flags="m">
             <xsl:matching-substring>
-                <rstd:field name="{regex-group(1)}"><xsl:value-of select="regex-group(3)"/></rstd:field>
+                <rstd:field name="{regex-group(1)}"><xsl:value-of select="normalize-space(regex-group(3))"/></rstd:field>
             </xsl:matching-substring>
             <xsl:non-matching-substring>
                 <xsl:if test="normalize-space(.) != ''">
