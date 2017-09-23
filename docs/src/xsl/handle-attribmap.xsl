@@ -8,7 +8,7 @@
 
     <xsl:output  indent="no"></xsl:output>
 
-    <xsl:variable name="pathToMappingTests">../../../../../core/src/test/resources/tests/mapping-tests/</xsl:variable>
+    <xsl:variable name="pathToMappingTests">../../../../core/src/test/resources/tests/mapping-tests/</xsl:variable>
     
     <!-- Copy Everything -->
     <xsl:template match="@* | node()">
