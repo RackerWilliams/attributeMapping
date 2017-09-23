@@ -119,13 +119,15 @@
     </xsl:template>
 
     <xsl:template match="rstd:directive[not(rstd:raw)]">
-        <xsl:text>.. </xsl:text><xsl:value-of select="@title"/>
-        <xsl:text> </xsl:text>
+        <xsl:text>&CR;</xsl:text>
+        <xsl:text>.. </xsl:text><xsl:value-of select="@type"/>
+        <xsl:text>::</xsl:text>
         <xsl:apply-templates />
+        <xsl:text>&CR;</xsl:text>
     </xsl:template>
 
     <xsl:template match="rstd:field">
-        <xsl:text>   :</xsl:text><xsl:value-of select="@name"/><xsl:text>:</xsl:text>
+        <xsl:text>&CR;   :</xsl:text><xsl:value-of select="@name"/><xsl:text>: </xsl:text>
         <xsl:value-of select="."/>
     </xsl:template>
 
