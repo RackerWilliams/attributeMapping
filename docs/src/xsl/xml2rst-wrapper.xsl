@@ -47,7 +47,7 @@
             <node name="line" indent="2"/>
         </data:lookup>
     </xsl:variable>
-    
+
     <!-- Wrap the text in an element -->
     <xsl:template match="/">
         <wapper>
@@ -111,13 +111,25 @@
     </xsl:template>
 
     <!-- Handle Directives -->
+
     <xsl:template match="rstd:directive[rstd:raw]">
         <xsl:text>&CR;</xsl:text>
         <xsl:value-of select="rstd:raw"/>
         <xsl:text>&CR;</xsl:text>
     </xsl:template>
-    
+
     <xsl:template match="rstd:directive[not(rstd:raw)]">
-        <xsl:message>Ignoring non raw directive <xsl:value-of select="@type"/></xsl:message>
+        <xsl:text>.. </xsl:text><xsl:value-of select="@title"/>
+        <xsl:text> </xsl:text>
+        <xsl:apply-templates />
+    </xsl:template>
+
+    <xsl:template match="rstd:field">
+        <xsl:text>   :</xsl:text><xsl:value-of select="@name"/><xsl:text>:</xsl:text>
+        <xsl:value-of select="."/>
+    </xsl:template>
+
+    <xsl:template match="rstd:content">
+        <xsl:value-of select="."/>
     </xsl:template>
 </xsl:stylesheet>
