@@ -38,10 +38,14 @@
         </xsl:if>
         <xsl:if test="$showSAML">
             <xsl:call-template name="rstd:outputSample">
-                <xsl:with-param name="sample" select="concat(' ',$pathToMappingTests,$testCase,'/asserts/',rstd:field[@name='saml'])"/>
+                <xsl:with-param name="sample" select="concat(' ',$pathToMappingTests,$testCase,'/asserts/',rstd:field[lower-case(@name)='saml'])"/>
                 <xsl:with-param name="type">saml</xsl:with-param>
             </xsl:call-template>
         </xsl:if>
+        <xsl:call-template name="rstd:outputSample">
+            <xsl:with-param name="sample" select="concat(' ',$pathToMappingTests,$testCase,'/maps/',rstd:field[lower-case(@name)='map'])"/>
+            <xsl:with-param name="type">map</xsl:with-param>
+        </xsl:call-template>
     </xsl:template>
 
     <xsl:template name="rstd:directive-fail">
