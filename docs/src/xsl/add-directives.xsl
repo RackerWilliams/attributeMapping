@@ -24,7 +24,7 @@
          turn it into a directive -->
     <xsl:template match="system_message[@level=3 and @type='ERROR' and contains(paragraph,'Unknown directive')]">
         <xsl:variable name="directiveText" select="literal_block" as="xs:string"/>
-        <rstd:directive>
+        <rstd:directive line="{@line}" source="{@source}">
             <xsl:call-template name="parseDirective">
                 <xsl:with-param name="directiveText" select="$directiveText"/>
             </xsl:call-template>

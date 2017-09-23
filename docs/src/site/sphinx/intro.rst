@@ -13,8 +13,12 @@ SAML Example
 
 The following is example SAML:
 
-.. highlight:: xml
-   :linenothreshold: 5
+.. attribmap:: defaults
+   :saml: sample_assert.xml
+   :saml-emphasize-lines: 26, 36, 40, 44
+   :saml-caption: Default Assertion
+   :map: defaults.yaml
+   :map-caption: Default Mapping Policy
 
 
 .. literalinclude::
