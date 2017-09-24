@@ -48,14 +48,14 @@
                 <xsl:with-param name="type">saml</xsl:with-param>
             </xsl:call-template>
         </xsl:if>
-        <xsl:call-template name="rstd:outputSample">
-            <xsl:with-param name="sample" select="concat(' ',$pathToMappingTests,$testCase,'/maps/',$map)"/>
-            <xsl:with-param name="type">map</xsl:with-param>
-        </xsl:call-template>
         <xsl:call-template name="rstd:outputResults">
             <xsl:with-param name="testCase" select="$testCase"/>
             <xsl:with-param name="saml" select="$saml"/>
             <xsl:with-param name="map" select="$map"/>
+        </xsl:call-template>
+        <xsl:call-template name="rstd:outputSample">
+            <xsl:with-param name="sample" select="concat(' ',$pathToMappingTests,$testCase,'/maps/',$map)"/>
+            <xsl:with-param name="type">map</xsl:with-param>
         </xsl:call-template>
     </xsl:template>
 
