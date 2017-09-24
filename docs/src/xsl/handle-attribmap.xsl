@@ -86,7 +86,7 @@
     <xsl:template match="mapping:*[@value]" mode="result">
         <row>
             <entry>
-                <paragraph><xsl:value-of select="name()"/></paragraph>
+                <paragraph><xsl:call-template name="rstd:attributeName"/></paragraph>
             </entry>
             <entry>
                 <paragraph><xsl:value-of select="@value"/></paragraph>
@@ -95,6 +95,35 @@
     </xsl:template>
 
     <xsl:template match="text()" mode="result"/>
+
+    <xsl:function name="rstd:name" as="xs:string">
+        <xsl:param name="in" as="node()"/>
+        <xsl:choose>
+            <xsl:when test="$in/@name"><xsl:value-of select="$in/@name"/></xsl:when>
+            <xsl:otherwise><xsl:value-of select="name($in)"/></xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
+    <xsl:function name="rstd:isStandardAttrib" as="xs:boolean">
+        <xsl:param name="in" as="node()"/>
+        <xsl:sequence select="(local-name($in/..)='user') and
+                              (namespace-uri($in/..)='http://docs.rackspace.com/identity/api/ext/MappingRules') and
+                              (local-name($in) = $defaultAttributes)"/>
+    </xsl:function>
+
+    <xsl:template name="rstd:attributeName">
+        <xsl:variable name="name" as="xs:string" select="rstd:name(.)"/>
+        <xsl:variable name="prefix" as="xs:string?">
+            <xsl:choose>
+                <xsl:when test="not(rstd:isStandardAttrib(.))">
+                    <xsl:value-of select="concat(rstd:name(..),'/')"/>
+                </xsl:when>
+                <!-- no prefix -->
+                <xsl:otherwise></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:value-of select="concat($prefix,$name)"/>
+    </xsl:template>
 
     <xsl:template name="rstd:outputSample">
         <xsl:param name="sample" as="xs:string"/>

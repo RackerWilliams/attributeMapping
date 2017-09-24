@@ -8,8 +8,8 @@ identity federation feature without making significant changes to your
 identity service provider.
 
 
-SAML Example
-------------
+Default Example
+---------------
 
 The following is example SAML:
 
@@ -29,5 +29,13 @@ The following is example SAML:
 
 Another important thing to note is that, bla, bla, bla...
 
+Extended Example
+----------------
+
+Here's an example of complex extended attribute map
+
+.. attribmap:: adfs-faws-ext2
+   :map: faws-s.yaml
+   :saml: sample_assert.xml
 
 
