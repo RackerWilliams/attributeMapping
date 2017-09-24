@@ -123,7 +123,7 @@
         <xsl:text>.. </xsl:text><xsl:value-of select="@type"/>
         <xsl:text>:: </xsl:text>
         <xsl:apply-templates />
-        <xsl:text>&CR;</xsl:text>
+        <xsl:text>&CR;&CR;</xsl:text>
     </xsl:template>
 
     <xsl:template match="rstd:field">
