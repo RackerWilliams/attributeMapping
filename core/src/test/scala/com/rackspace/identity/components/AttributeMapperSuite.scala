@@ -38,6 +38,8 @@ class AttributeMapperSuite extends AttributeMapperBase {
     d
   }
 
+  val cleanupSAMLXSLExec = AttributeMapper.compiler.compile (new StreamSource(new File("src/test/resources/xsl/cleanup-saml.xsl")))
+
 
   def getMapsFromTest (test : File) : List[File] = new File(test, "maps").listFiles().toList.filter(f => {
     f.toString.endsWith("xml") || f.toString.endsWith("json") || f.toString.endsWith("yaml")})
@@ -121,6 +123,17 @@ class AttributeMapperSuite extends AttributeMapperBase {
       resultSerializer,
       false,
       false)
+
+    //
+    // Create a clean up version of the SAML assertion or docs as well
+    //
+    val cleanAssertFile = new File(assertTestDir, assertFile.getName)
+    val assertSerializer = AttributeMapper.processor.newSerializer(cleanAssertFile)
+    val cleanAssertTrans = AttributeMapper.getXsltTransformer (cleanupSAMLXSLExec)
+
+    cleanAssertTrans.setSource(new StreamSource(assertFile))
+    cleanAssertTrans.setDestination(assertSerializer)
+    cleanAssertTrans.transform()
 
     dest.getXdmNode.asSource
   })
