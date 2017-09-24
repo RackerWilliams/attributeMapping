@@ -86,10 +86,10 @@
     <xsl:template match="mapping:*[@value]" mode="result">
         <row>
             <entry>
-                <paragraph><xsl:call-template name="rstd:attributeName"/></paragraph>
+                <xsl:call-template name="rstd:attributeName"/>
             </entry>
             <entry>
-                <paragraph><xsl:value-of select="@value"/></paragraph>
+                <xsl:call-template name="rstd:attributeValue"/>
             </entry>
         </row>
     </xsl:template>
@@ -122,7 +122,28 @@
                 <xsl:otherwise></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:value-of select="concat($prefix,$name)"/>
+        <paragraph><xsl:value-of select="concat($prefix,$name)"/></paragraph>
+    </xsl:template>
+
+    <xsl:template name="rstd:attributeValue">
+        <xsl:variable name="isMultiValue" as="xs:boolean"
+                      select="(rstd:isStandardAttrib(.) and rstd:name(.)='roles') or (@multiValue and xs:boolean(@multiValue))"/>
+        <xsl:variable name="rawValue" as="xs:string" select="@value"/>
+        <xsl:choose>
+            <xsl:when test="$isMultiValue">
+                <xsl:variable name="values" as="xs:string*" select="tokenize($rawValue,' ')"/>
+                <bullet_list bullet="-">
+                    <xsl:for-each select="$values">
+                        <list_item>
+                            <paragraph><xsl:value-of select="."/></paragraph>
+                        </list_item>
+                    </xsl:for-each>
+                </bullet_list>
+            </xsl:when>
+            <xsl:otherwise>
+                <paragraph><xsl:value-of select="$rawValue"/></paragraph>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="rstd:outputSample">
