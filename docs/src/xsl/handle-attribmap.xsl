@@ -23,8 +23,9 @@
 
     <xsl:template match="rstd:directive[lower-case(@type)='attribmap']">
         <xsl:variable name="testCase" as="xs:string?" select="normalize-space(rstd:content[1])"/>
-        <xsl:variable name="showSAMLField" as="node()?" select="rstd:getField(.,'saml-show')"/>
-        <xsl:variable name="showSAML" as="xs:boolean" select="empty($showSAMLField) or xs:boolean(string($showSAMLField))"/>
+        <xsl:variable name="showSAML" as="xs:boolean" select="rstd:getFieldAsBool(., 'saml-show')"/>
+        <xsl:variable name="showMap" as="xs:boolean" select="rstd:getFieldAsBool(., 'map-show')"/>
+        <xsl:variable name="showResults" as="xs:boolean" select="rstd:getFieldAsBool(., 'results-show')"/>
         <xsl:variable name="saml" as="node()?" select="rstd:getField(., 'saml')"/>
         <xsl:variable name="map" as="node()?" select="rstd:getField(., 'map')"/>
         <xsl:if test="$testCase = ''">
@@ -48,15 +49,19 @@
                 <xsl:with-param name="type">saml</xsl:with-param>
             </xsl:call-template>
         </xsl:if>
-        <xsl:call-template name="rstd:outputSample">
-            <xsl:with-param name="sample" select="concat(' ',$pathToMappingTests,$testCase,'/maps/',$map)"/>
-            <xsl:with-param name="type">map</xsl:with-param>
-        </xsl:call-template>
-        <xsl:call-template name="rstd:outputResults">
-            <xsl:with-param name="testCase" select="$testCase"/>
-            <xsl:with-param name="saml" select="$saml"/>
-            <xsl:with-param name="map" select="$map"/>
-        </xsl:call-template>
+        <xsl:if test="$showMap">
+            <xsl:call-template name="rstd:outputSample">
+                <xsl:with-param name="sample" select="concat(' ',$pathToMappingTests,$testCase,'/maps/',$map)"/>
+                <xsl:with-param name="type">map</xsl:with-param>
+            </xsl:call-template>
+        </xsl:if>
+        <xsl:if test="$showResults">
+            <xsl:call-template name="rstd:outputResults">
+                <xsl:with-param name="testCase" select="$testCase"/>
+                <xsl:with-param name="saml" select="$saml"/>
+                <xsl:with-param name="map" select="$map"/>
+            </xsl:call-template>
+        </xsl:if>
     </xsl:template>
 
 
@@ -182,6 +187,13 @@
         <xsl:param name="directive" as="node()"/>
         <xsl:param name="name" as="xs:string"/>
         <xsl:sequence select="$directive/rstd:field[lower-case(@name) = $name]"/>
+    </xsl:function>
+
+    <xsl:function name="rstd:getFieldAsBool" as="xs:boolean">
+        <xsl:param name="directive" as="node()"/>
+        <xsl:param name="name" as="xs:string"/>
+        <xsl:variable name="field" as="node()?" select="rstd:getField($directive,$name)"/>
+        <xsl:sequence select="empty($field) or xs:boolean(string($field))"/>
     </xsl:function>
 
     <xsl:template name="rstd:directive-fail">
