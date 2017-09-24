@@ -44,7 +44,7 @@
         </xsl:if>
         <xsl:if test="$showSAML">
             <xsl:call-template name="rstd:outputSample">
-                <xsl:with-param name="sample" select="concat(' ',$pathToMappingTests,$testCase,'/asserts/',$saml)"/>
+                <xsl:with-param name="sample" select="concat(' ../',$pathToMappingResults,$testCase,'/',$saml,'/',$saml)"/>
                 <xsl:with-param name="type">saml</xsl:with-param>
             </xsl:call-template>
         </xsl:if>
