@@ -94,6 +94,9 @@ class AttributeMapperSuite extends AttributeMapperBase {
     //  Output a result of the map format.  This will be use for
     //  documentation and to generate reports.
     //
+    val mapExec = AttributeMapper.generateXSLExec(new StreamSource(map),
+      PolicyFormat.withName(mapFormat), true, v)
+
     val resultTestDir = {
       val rt = new File (mapResultsDir, map.getParentFile.getParentFile.getName)
       rt.mkdir
@@ -107,19 +110,17 @@ class AttributeMapperSuite extends AttributeMapperBase {
     }
 
     val resultFile = new File(assertTestDir, {
-      if (map.getName.endsWith(".yaml")) map.getName+".json" else map.getName
+      if (!map.getName.endsWith(".xml")) map.getName + ".xml" else map.getName
     })
 
     val resultSerializer = AttributeMapper.processor.newSerializer(resultFile)
 
     AttributeMapper.convertAssertion (
-      new StreamSource(map),
-      PolicyFormat.withName(mapFormat),
+      mapExec,
       new StreamSource(assertFile),
       resultSerializer,
       false,
-      true,
-      v)
+      false)
 
     dest.getXdmNode.asSource
   })
