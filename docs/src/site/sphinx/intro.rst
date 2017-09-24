@@ -21,25 +21,13 @@ The following is example SAML:
    :map-caption: Default Mapping Policy
 
 
-.. highlight:: yaml
-   :linenothreshold: 5
+.. attribmap:: defaults2
+   :saml: sample_assert.xml
+   :saml-show: false
+   :map: defaults2.yaml
+   :map-caption: The mapping policy derives the email by name
 
-.. literalinclude::
-   ./../../../../core/src/test/resources/tests/mapping-tests/defaults/maps/defaults.yaml
-   :linenos:
-   :caption: Default Policy
+Another important thing to note is that, bla, bla, bla...
 
-.. sidebar:: Resulting Attributes 2
 
-   +--------+---------------------------+
-   | domain | 32367                     |
-   +--------+---------------------------+
-   | name   | joe.doe                   |
-   +--------+---------------------------+
-   | email  | no-reply@rackspace.com    |
-   +--------+---------------------------+
-   | roles  | nova:admin                |
-   +--------+---------------------------+
-   | expire | 2013-11-17T16:19:06.298Z  |
-   +--------+---------------------------+
 
