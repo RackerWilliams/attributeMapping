@@ -121,7 +121,7 @@
     <xsl:template match="rstd:directive[not(rstd:raw)]">
         <xsl:text>&CR;</xsl:text>
         <xsl:text>.. </xsl:text><xsl:value-of select="@type"/>
-        <xsl:text>::</xsl:text>
+        <xsl:text>:: </xsl:text>
         <xsl:apply-templates />
         <xsl:text>&CR;</xsl:text>
     </xsl:template>
