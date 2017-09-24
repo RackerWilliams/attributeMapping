@@ -15,7 +15,7 @@ The following is example SAML:
 
 .. attribmap:: defaults
    :saml: sample_assert.xml
-   :saml-emphasize-lines: 26, 36, 40, 44
+   :saml-emphasize-lines: 17, 19, 29, 32, 35
    :saml-caption: Default Assertion
    :map: defaults.yaml
    :map-caption: Default Mapping Policy
