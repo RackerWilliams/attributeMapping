@@ -3,13 +3,17 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:rstd="http://www.rackspace.com/docs/rstd"
+    xmlns:mapping="http://docs.rackspace.com/identity/api/ext/MappingRules"
     exclude-result-prefixes="xs"
     version="2.0">
 
     <xsl:output  indent="no"></xsl:output>
 
     <xsl:variable name="pathToMappingTests">../../../../core/src/test/resources/tests/mapping-tests/</xsl:variable>
-    
+    <xsl:variable name="pathToMappingResults">../../../core/target/map-results/</xsl:variable>
+
+    <xsl:variable name="defaultAttributes" as="xs:string*" select="('name','email','expire','domain','roles')"/>
+
     <!-- Copy Everything -->
     <xsl:template match="@* | node()">
         <xsl:copy>
@@ -48,7 +52,51 @@
             <xsl:with-param name="sample" select="concat(' ',$pathToMappingTests,$testCase,'/maps/',$map)"/>
             <xsl:with-param name="type">map</xsl:with-param>
         </xsl:call-template>
+        <xsl:call-template name="rstd:outputResults">
+            <xsl:with-param name="testCase" select="$testCase"/>
+            <xsl:with-param name="saml" select="$saml"/>
+            <xsl:with-param name="map" select="$map"/>
+        </xsl:call-template>
     </xsl:template>
+
+
+    <xsl:template name="rstd:outputResults">
+        <xsl:param name="testCase" as="xs:string"/>
+        <xsl:param name="saml" as="xs:string"/>
+        <xsl:param name="map" as="xs:string"/>
+        <xsl:variable name="resultName" as="xs:string"
+                      select="if (not(ends-with($map,'.xml'))) then concat($map,'.xml') else $map"/>
+        <xsl:variable name="result" as="node()"
+                      select="doc(concat($pathToMappingResults,'/',$testCase,'/',$saml,'/',$resultName))"/>
+        <xsl:variable name="rows" as="node()*">
+            <xsl:apply-templates select="$result" mode="result"/>
+        </xsl:variable>
+        <sidebar>
+            <title>Resulting Attributes</title>
+            <table>
+                <tgroup cols="2">
+                    <colspec colwidth="{max(for $p in $rows/entry[1]/paragraph return string-length($p)+2)}"/>
+                    <colspec colwidth="{max(for $p in $rows/entry[2]/paragraph return string-length($p)+2)}"/>
+                    <tbody>
+                        <xsl:copy-of select="$rows"/>
+                    </tbody>
+                </tgroup>
+            </table>
+        </sidebar>
+    </xsl:template>
+
+    <xsl:template match="mapping:*[@value]" mode="result">
+        <row>
+            <entry>
+                <paragraph><xsl:value-of select="name()"/></paragraph>
+            </entry>
+            <entry>
+                <paragraph><xsl:value-of select="@value"/></paragraph>
+            </entry>
+        </row>
+    </xsl:template>
+
+    <xsl:template match="text()" mode="result"/>
 
     <xsl:template name="rstd:outputSample">
         <xsl:param name="sample" as="xs:string"/>
