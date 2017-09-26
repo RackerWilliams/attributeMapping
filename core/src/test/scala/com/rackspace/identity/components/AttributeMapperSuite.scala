@@ -29,7 +29,7 @@ import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
 class AttributeMapperSuite extends AttributeMapperBase {
-
+  val paramMap = Map("domain"->"foo:999-882") // default parameters used in tests.
   val testDir = new File("src/test/resources/tests/mapping-tests")
   val tests : List[File] = testDir.listFiles.toList.filter(f=>f.isDirectory)
 
@@ -90,7 +90,8 @@ class AttributeMapperSuite extends AttributeMapperBase {
       dest,
       true,
       true,
-      v, Map("domain"->"foo:999-882"))
+      v,
+      paramMap)
 
     //
     //  Output a result of the map format.  This will be use for
@@ -122,7 +123,8 @@ class AttributeMapperSuite extends AttributeMapperBase {
       new StreamSource(assertFile),
       resultSerializer,
       false,
-      false)
+      false,
+      paramMap)
 
     //
     // Create a clean up version of the SAML assertion or docs as well
@@ -162,7 +164,7 @@ class AttributeMapperSuite extends AttributeMapperBase {
           AttributeMapper.generateXSLExec (docBuilder.parse(map), true, v)
       }
 
-      val resultDoc = AttributeMapper.convertAssertion (policyExec, docBuilder.parse(assertFile), Map("domain"->"foo:999-882"))
+      val resultDoc = AttributeMapper.convertAssertion (policyExec, docBuilder.parse(assertFile), paramMap)
       new DOMSource(resultDoc)
     } finally {
       if (docBuilder != null) returnParser(docBuilder)
