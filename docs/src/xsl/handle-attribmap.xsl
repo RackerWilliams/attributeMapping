@@ -7,7 +7,9 @@
     exclude-result-prefixes="xs"
     version="2.0">
 
-    <xsl:output  indent="no"></xsl:output>
+    <xsl:import href="util.xsl"/>
+
+    <xsl:output  indent="no"/>
 
     <xsl:variable name="pathToMappingTests">../../../../core/src/test/resources/tests/mapping-tests/</xsl:variable>
     <xsl:variable name="pathToMappingResults">../../../core/target/map-results/</xsl:variable>
@@ -181,24 +183,5 @@
                 <rstd:field name="emphasize-lines"><xsl:value-of select="$emphasize"/></rstd:field>
             </xsl:if>
         </rstd:directive>
-    </xsl:template>
-
-    <xsl:function name="rstd:getField" as="node()?">
-        <xsl:param name="directive" as="node()"/>
-        <xsl:param name="name" as="xs:string"/>
-        <xsl:sequence select="$directive/rstd:field[lower-case(@name) = $name]"/>
-    </xsl:function>
-
-    <xsl:function name="rstd:getFieldAsBool" as="xs:boolean">
-        <xsl:param name="directive" as="node()"/>
-        <xsl:param name="name" as="xs:string"/>
-        <xsl:variable name="field" as="node()?" select="rstd:getField($directive,$name)"/>
-        <xsl:sequence select="empty($field) or xs:boolean(string($field))"/>
-    </xsl:function>
-
-    <xsl:template name="rstd:directive-fail">
-        <xsl:param name="msg" as="xs:string"/>
-        <xsl:message terminate="yes">Error in <xsl:value-of select="@type"/> directive. <xsl:value-of
-        select="concat($msg,' ',@source,':',@line)"/></xsl:message>
     </xsl:template>
 </xsl:stylesheet>
