@@ -29,7 +29,6 @@ import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
 class AttributeMapperSuite extends AttributeMapperBase {
-
   val testDir = new File("src/test/resources/tests/mapping-tests")
   val tests : List[File] = testDir.listFiles.toList.filter(f=>f.isDirectory)
 
