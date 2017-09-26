@@ -12,8 +12,8 @@
 
     <modules>
         <module>core</module>
-        <module>cli</module>
         <module>docs</module>
+        <module>cli</module>
     </modules>
 
     <scm>
