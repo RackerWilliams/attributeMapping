@@ -70,3 +70,5 @@ version: |version|
    :caption: Contents:
 
    intro
+   xpath
+   yaml
