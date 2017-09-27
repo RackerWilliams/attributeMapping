@@ -36,15 +36,14 @@ XPath 3.1
    way by the mapping policy language. The datatypes and function
    libraries defined by the XPath standard are used in other policy
    languages such as XACML. In most cases, only basic understanding of
-   XPath is required, see the XPath Basics appendix for a quick
-   overview.
+   XPath is required, see :doc:`xpath` for a quick overview.
 
 YAML 1.1
    YAML is a simple data serialization language that is designed to be
    human friendly.  YAML is very similar to JSON but allows for useful
    features such as comments and the ability to easily input
    multi-line data. Attribute mapping policies are written in YAML,
-   see the YAML Basics appendix for a quick overview.
+   see :doc:`yaml` for a quick overview.
 
 
 What is Attribute Mapping?
