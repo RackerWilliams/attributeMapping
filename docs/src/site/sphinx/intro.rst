@@ -49,7 +49,62 @@ YAML 1.1
 What is Attribute Mapping?
 --------------------------
 
-Your identity provider contains information about you.
+Your identity provider contains information about every user in your
+organization.  For example, it maintains that Jane Doe is a
+development manager whose username is ``janed``. Jane's email address
+is janed@widgets.com, and as a development manager she is a member of
+the ``engineering``, ``managers``, and ``linux_user``
+group. Additonally, Jane is managing the ``widgets_ui`` project.
+
+When Jane logs into Rackspace your organization's identity provider
+submits to Rackspace a cryptographically signed SAML response that
+contains (among other things) the *attributes* described
+above. Rackspace (the service provider) needs these attributes in
+order to grant Jane access to Rackspace services.
+
+Attribute mapping allows the extraction and transformaiton of the
+attributes in the SAML response so they can be processed by
+Rackspace. There are three major reasons why attribute mapping is
+required:
+
+Attribute Name Alignment
+........................
+
+Rackspace expects that Jane's email is supplied in an attribute named
+``email``, but your organization's identity provider by default
+submits a user's email in an attribute named ``mail``. This is not an
+atypical situation because several competing standards exist for
+attribute names. In this case the attribute ``mail`` must be mapped to
+the attribute ``email``.
+
+``mail`` → ``email``
+
+Role and Group Alignment
+........................
+
+The groups ``engineering``, ``managers``, and ``linux_user`` are
+entirely meaningless to Rackspace.  Rackspace organizes its roles
+according to the services it provides. For example, the ``nova:admin``
+role grants administration access to our OpenStack compute service and
+the ``ticketing:observer`` role grants view only access to Rackspace
+tickets.
+
+In this case, we want the ``managers`` group to map to the
+``ticketing:admin`` role because any manager should be able to create
+and edit tickets. We also want to map managers to the
+``billing:observer`` role because all managers can see invoices.
+Additionally, we want to map the ``linux_user`` group to
+``nova:observer`` because all linux users should be able to query the
+Compute API.
+
+``managers``    → ``ticketing:admin``,  ``billing:observer``
+
+``linux_user``  → ``nova:observer``
+
+Implementation of Access Policies
+.................................
+
+The mapping above
 
 
 Default Example
