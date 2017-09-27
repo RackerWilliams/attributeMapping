@@ -66,7 +66,11 @@ author = u'Rackspace'
 # built documents.
 #
 # The short X.Y version.
-version = model.parent.version
+if model.version:
+    version = model.version
+else:
+    version = model.parent.version
+
 # The full version, including alpha/beta/rc tags.
 release = version
 
