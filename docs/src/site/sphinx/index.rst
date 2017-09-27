@@ -70,5 +70,7 @@ version: |version|
    :caption: Contents:
 
    intro
+   map
+   examples
    xpath
    yaml
