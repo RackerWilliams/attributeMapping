@@ -54,7 +54,7 @@ organization.  For example, it maintains that Jane Doe is a
 development manager whose username is ``janed``. Jane's email address
 is janed@widgets.com, and as a development manager she is a member of
 the ``engineering``, ``managers``, and ``linux_user``
-group. Additonally, Jane is managing the ``widgets_ui`` project.
+groups. Additonally, Jane is managing the ``widgets_ui`` project.
 
 When Jane logs into Rackspace your organization's identity provider
 submits to Rackspace a cryptographically signed SAML response that
@@ -77,6 +77,8 @@ atypical situation because several competing standards exist for
 attribute names. In this case the attribute ``mail`` must be mapped to
 the attribute ``email``.
 
+The mapping is simple and can be summarized as follows:
+
 ``mail`` → ``email``
 
 Role and Group Alignment
@@ -97,6 +99,8 @@ Additionally, we want to map the ``linux_user`` group to
 ``nova:observer`` because all linux users should be able to query the
 Compute API.
 
+The mapping described above can be summerized as follows:
+
 ``managers``    → ``ticketing:admin``,  ``billing:observer``
 
 ``linux_user``  → ``nova:observer``
@@ -104,31 +108,60 @@ Compute API.
 Implementation of Access Policies
 .................................
 
-The mapping above
+The mapping above is fairly simple.  All users in the ``managers``
+group will obtain the ``ticketing:admin`` and ``billing:observer``
+roles. Unfortunately, things are often more complicated than this. For
+example, some managers are actually contractors, and contractors
+should not be allowed to view invoices so these contractors should not
+recive the ``billing:observer`` role. You can tell that a user is a
+contractor by looking at membership in the ``contractors`` group.
+
+Additionally, there are separate Rackspace accounts for each project
+managed by a manager. A manager involved with the ``widgets_ui``
+project should have full administrator rights (via the ``admin`` role)
+to account ``777654`` -- which is the account associated with that
+project.  The identity provider passes an attribute named
+``manager_projects`` that contains the list of all of the projects
+managed by a user.
+
+There are two other projects to consider: ``widgets_moble`` is
+associated with project ``887655``, and ``widgets_platform`` which
+should have admin access to account ``779966``.
+
+Note that by performing this mapping, you are implementing an access
+policy that is executed whenever a user logs in. As long as relevent
+information is provided by the identity provider in a SAML response
+you can implement similar policies for your organization.
+
+The mapping rules above can be summerized as follows:
 
 
-Default Example
----------------
+``managers`` → ``ticketing:admin``,  ``billing:observer`` unless the
+user is also a member of ``contractors``.
 
-The following is example SAML:
+``contractors``  → ``ticketing:admin``
 
-.. saml:: defaults/sample_assert.xml
-   :emphasize-lines: 17, 19, 29, 32, 35
-   :caption: Default Assertion
+``manager_projects`` contains ``widgets_ui``    → ``admin`` on
+``777654``
 
-With that you can use a default mapping policy that looks like this:
+``manager_projects`` contains ``widgets_moble`` → ``admin`` on
+``887655``
 
-.. map:: defaults/defaults.yaml
-   :caption: Default Mapping Policy
-   :emphasize-lines: 3-7
+``manager_projects`` contains ``widgets_platform`` → ``admin`` on
+``779956``
 
-Extended Example
-----------------
 
-Here's an example of complex extended attribute map
+Mapping Policy for Widget.com
+-----------------------------
 
-.. attribmap:: adfs-faws-ext2
-   :map: faws-s.yaml
-   :saml: sample_assert.xml
+The following attribute mapping policy implements the rules described
+in the previous section. The rest of this document provides a guide
+for writting such polices.
+
+
+..
+  Place holder for now...
+  .. map:: widgets/widgets.yaml
+      :caption: Mapping policy for Widget.com
 
 
