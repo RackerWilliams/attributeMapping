@@ -59,18 +59,14 @@
       :caption: Default Assertion
       :emphasize-lines: 17, 19, 29, 32, 35
 
-Welcome to Attribute Mapping's documentation!
-=============================================
+Attribute Mapping Policy Reference
+==================================
+
+version: |version|
+
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
    intro
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`search`
