@@ -57,7 +57,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Attribute Mapping'
+project = u'Attribute Mapping Policy Reference'
 copyright = u'2017, Rackspace'
 author = u'Rackspace'
 
