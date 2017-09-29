@@ -37,6 +37,12 @@ from org.apache.maven.model.io.xpp3 import MavenXpp3Reader
 ##
 model = MavenXpp3Reader().read(FileReader("pom.xml"))
 
+try:
+    import sphinx_rtd_theme
+except ImportError:
+    sphinx_rtd_theme = None
+
+
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
@@ -100,13 +106,29 @@ todo_include_todos = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+if sphinx_rtd_theme:
+    html_theme = 'sphinx_rtd_theme'
+else:
+    html_theme = 'alabaster'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
 # html_theme_options = {}
+
+# The name for this set of Sphinx documents.  If None, it defaults to
+# "<project> v1.0 documentation".
+html_title = 'Attribute Mapping Policy Reference v'+version
+
+# A shorter title for the navigation bar.  Default is the same as html_title.
+html_short_title = 'Mapping Policy Reference  v'+version
+
+
+# If true, SmartyPants will be used to convert quotes and dashes to
+# typographically correct entities.
+html_use_smartypants = True
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -117,8 +139,10 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'AttributeMappingdoc'
+htmlhelp_basename = 'docs-rackspace-federation-mapping'
 
+# this will change the 'paragraph' character to '#'
+html_add_permalinks = '#'
 
 # -- Options for LaTeX output ---------------------------------------------
 
