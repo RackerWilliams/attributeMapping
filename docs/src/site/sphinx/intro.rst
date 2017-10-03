@@ -125,7 +125,7 @@ project.  The identity provider passes an attribute named
 managed by a user.
 
 There are two other projects to consider: ``widgets_moble`` is
-associated with project ``887655``, and ``widgets_platform`` which
+associated with account ``887655``, and ``widgets_platform`` which
 should have admin access to account ``779966``.
 
 Note that by performing this mapping, you are implementing an access
@@ -138,8 +138,6 @@ The mapping rules above can be summarized as follows:
 
 ``managers`` → ``ticketing:admin``,  ``billing:observer`` unless the
 user is also a member of ``contractors``.
-
-``contractors``  → ``ticketing:admin``
 
 ``manager_projects`` contains ``widgets_ui``    → ``admin`` on
 ``777654``
@@ -158,10 +156,7 @@ The following attribute mapping policy implements the rules described
 in the previous section. The rest of this document provides a guide
 for writing such polices.
 
-
-..
-  Place holder for now...
-  .. map:: widgets/widgets.yaml
-      :caption: Mapping policy for Widget.com
+.. map:: widgets/widgets.yaml
+    :caption: Mapping policy for Widget.com
 
 
