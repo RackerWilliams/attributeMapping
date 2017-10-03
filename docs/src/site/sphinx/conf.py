@@ -68,6 +68,16 @@ project = u'Attribute Mapping Policy Reference'
 copyright = u'2017, Rackspace'
 author = u'Rackspace'
 
+# Global variables that are replaced by the specified value during the build
+# process.
+
+rst_epilog = """
+
+.. |service| replace:: Rackspace Identity Federation
+.. |product name| replace:: Attribute Mapping Policy Reference
+
+"""
+
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
