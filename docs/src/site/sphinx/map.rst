@@ -28,15 +28,11 @@ logged in. It contains within it all of the information deemed by the
 IDP to be relevant to the Service Provider (the SP -- which in this
 case is Rackspace).
 
-.. todo::
-
-   Include link to Federation User Guide, below.
-
 .. note::
 
    For help configuring Third Party identity providers (such as Active
    Directory Federation Services, Okta, and others) please refer to the
-   Rackspace Identity Federation User Guide.
+   `Rackspace Identity Federation User Guide`_.
 
 Parts of the SAML Assertion
 ...........................
@@ -118,4 +114,9 @@ Remote
 
 XPath vs Attribute Names
 ------------------------
+
+.. References:
+
+.. _Rackspace Identity Federation User Guide:
+   http://developer.rackspace.com/docs/rackspace-federation
 
