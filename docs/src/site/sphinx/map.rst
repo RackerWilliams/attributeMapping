@@ -137,10 +137,47 @@ email, in which case the email will be located in the Subject section.
 Roles
 .....
 
+Another attribute expected by Rackspace Identity is the list of roles
+that should be assigned to the federated user.  Rackspace Identity
+only allows roles that it recognizes to be assigned.  See the
+`Rackspace Identity Federation User Guide`_ for the most current `list
+of allowed roles`_.
 
+In the SAML Assertion above the list of roles is specified in an
+attribute named ``roles`` on lines 71-73.  Note that this is a good
+use case for a multi-value attribute, but in this case we only assign
+the ``nova:admin`` role.
 
 Expire
 ......
+
+Finally, Rackspace identity needs to understand the amount of time
+that a federated user should be allowed on Rackspace systems before
+the user is forced to re-authenticate.  This attribute can be
+expressed in two different formats. First, an `ISO 8601`_ timestamp
+may be provided, this timestamp should include a time zone designator.
+For example, the timestamp ``2017-10-04T16:20:57Z`` signifies that the
+user should be forced to re-authenticate after October 4th 2017 at
+16:20:57 UTC.  Secondly, an `ISO 8601`_ duration may be specified.
+For example, ``PT1H2M`` signifies that the user should be forced to
+re-authenticate one hour and two minuets after successfully logging
+in.
+
+In the SAML Assertion above an expire timestamp is specified in the
+``NotOnOrAfter`` attribute of the SubjectConfirmationData on line 61.
+In SAML, this attribute is meant to denote the time after which the
+SAML Assertion should no longer be considered valid. While this
+timestamp does not fit semantically with the expire attribute that
+Rackspace Identity expects it still works as a reasonable timestamp.
+
+Other Attributes
+................
+
+The attributes described in the previous sections (domain, name,
+email, roles, and expire) are expected in every federated login. Some
+Rackspace products may expect additional optional attributes. Please
+consult the `Rackspace Identity Federation User Guide`_ for details on
+these attributes.
 
 
 A simple Attribute Mapping Policy
@@ -160,4 +197,7 @@ XPath vs Attribute Names
 
 .. _Rackspace Identity Federation User Guide:
    http://developer.rackspace.com/docs/rackspace-federation
-
+.. _list of allowed roles:
+   http://developer.rackspace.com/docs/rackspace-federation/docs/attribmapping-basics/full-roles.html
+.. _ISO 8601:
+   https://en.wikipedia.org/wiki/ISO_8601
