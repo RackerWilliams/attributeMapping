@@ -89,21 +89,46 @@ overwritten with a mapping policy.
 Required Attributes
 -------------------
 
+We now examine the attributes that Rackspace Identity requires in
+order to successfully authenticate a user.  As we look through these,
+we'll examine where we can retrieve these attributes from the SAML
+Response above.
+
 Domain
 ......
 
-Name and Email
-..............
+Rackspace Identity keeps information about users, roles, and other
+entitlements in a domain. When a user federates into Rackspace, the
+user is placed in a single identity domain. Each domain is accessed
+via a unique alpha-numeric ID which Rackspace usually sets to be the
+same the user's account ID. This ID is required when a federated user
+requests access.  This is especially important because a customer is
+allowed to create multiple domains and Rackspace Identity needs to
+place the federated user in the correct one.
 
-Expire
-......
+In the SAML Assertion above the domain is passed as a SAML attribute
+in lines 74-76. This implies that the identity provider was
+pre-configured to emit the correct value. It is not strictly required
+that IDP do this since most federated users target a single domain and
+the domain value can be easily hard coded in an attribute mapping
+policy as we'll see later in this chapter.
+
+Name
+....
+
+
+Email
+.....
 
 Roles
 .....
 
+Expire
+......
 
-Attribute Mapping Rules
------------------------
+
+A simple Attribute Mapping Policy
+---------------------------------
 
 Local
 .....
