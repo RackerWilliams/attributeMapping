@@ -136,11 +136,6 @@ html_title = 'Attribute Mapping Policy Reference v'+version
 html_short_title = 'Mapping Policy Reference  v'+version
 
 
-# If true, SmartyPants will be used to convert quotes and dashes to
-# typographically correct entities.
-html_use_smartypants = True
-
-
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
