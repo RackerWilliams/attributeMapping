@@ -4,8 +4,91 @@
 Attribute Mapping Basics
 ========================
 
+Attribute mapping policies describe a means of extracting a set of
+well known identity attributes from a signed SAML assertion produced
+by an Identity Service Provider (IDP).  We'll begin this section by
+looking at a sample SAML assertion in detail, we'll then describe the
+attributes that identity needs to extract from the assertion in order
+to operate, and we'll wrap up by looking at a mapping policy that
+extracts those attributes from the assertion.
+
+
 The SAML Assertion
 ------------------
+
+When an Identity Provider successfully authenticates a user it
+presents Rackspace Identity with a SAML Assertion, much like the one
+below:
+
+.. saml:: mapping-rule-exp/sample_assert.xml
+   :caption: Example SAML Assertion.
+
+The assertion describes a view of the user that has successfully
+logged in. It contains within it all of the information deemed by the
+IDP to be relevant to the Service Provider (the SP -- which in this
+case is Rackspace).
+
+.. todo::
+
+   Include link to Federation User Guide, below.
+
+.. note::
+
+   For help configuring Third Party identity providers (such as Active
+   Directory Federation Services, Okta, and others) please refer to the
+   Rackspace Identity Federation User Guide.
+
+Parts of the SAML Assertion
+...........................
+
+In this section, we break down the SAML assertion listed above into
+its relevant parts. Note first that per the SAML protocol, the
+assertion itself is wrapped in a ``<saml2p:Response />`` element which
+begins on line 2.  The actual assertion (``<saml2p:Assertion />``)
+begins in line 34.
+
+Issuer (37):
+  The issuer is the system that generated (or issued) the assertion.
+  This is identified as a URI.
+
+Signature (38-57):
+  The XML Signature of the assertion part of the request. The
+  signature is used to verify that that the assertion was indeed
+  produced by the issuer.
+
+Subject (58-63):
+  The subject is used to identify the identity (or user) that the
+  assertion is about.
+
+AuthnStatement (64-69):
+  The AuthnStatement contains details on how the subject
+  authenticated.
+
+AttributeStatement (70-91):
+  This section contains a list of arbitrary attributes associated with
+  the subject.  Each attribute in the list is essentially a name/value
+  pair.  Note, that values are of a type identified by the
+  ``xsi:type`` XML attribute -- in this case they are all strings.
+  Also note, that attributes may have multiple values.  The groups
+  attribute defined in 80-84, for example, contains 3 separate values
+  (group1, group2, and group3).
+
+Signing SAML Assertions
+.......................
+
+Both the SAML Response (2) and the SAML Assertion (34) may be signed.
+Rackspace Identity may verify both signatures. It's important to note
+however that while signing the SAML Response is optional, signing the
+SAML Assertion is strictly required. This means that a message that
+contains a single signature at the SAML Response level will be
+rejected.
+
+It is possible for a SAML Response to contain multiple assertions. In
+this case, all assertions must be signed and they must all be issued
+by the same issuer.  Rackspace Identity typically examines only the
+first assertion for authorization data, this behavior can be easily
+overwritten with a mapping policy.
+
 
 Required Attributes
 -------------------
