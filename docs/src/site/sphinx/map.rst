@@ -116,12 +116,28 @@ policy as we'll see later in this chapter.
 Name
 ....
 
+This is the username of the federated user.  Rackspace Identity
+assumes that each user will be identified with a unique username, and
+that the same user will have the same username from one federated
+login to the next.
+
+In the SAML Assertion above the username is identified by the
+``NameID`` in the Subject section of the assertion (line 59). That
+said, it is possible for an IDP to return a stable username as an
+attribute in the AttributeStatement section.
 
 Email
 .....
 
+This is the email of the federated user.  In the SAML assertion it is
+identified as an attribute in the AttributeStatement section (lines
+77-79). Some IDPs will make no distinction between a username and an
+email, in which case the email will be located in the Subject section.
+
 Roles
 .....
+
+
 
 Expire
 ......
