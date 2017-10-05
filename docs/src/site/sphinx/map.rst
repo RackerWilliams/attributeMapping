@@ -189,13 +189,12 @@ requires.  This is summarized in the table below:
 
 .. include:: tables/loc.rst
 
-The values at those locations are listed here:
-
 .. attribmap:: mapping-rule-exp
    :saml: sample_assert.xml
    :saml-show: false
    :map: mapping-rule-exp-xpth.yaml
    :map-show: false
+   :results-caption: The values at those locations are listed here:
 
 In a sense, this table represents an attribute mapping.  We are
 mapping data located in the SAML Assertion into attributes that
