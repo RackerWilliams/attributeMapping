@@ -206,10 +206,68 @@ pinpointing the exact location of the data that we need. After all,
 XPath was designed specifically to pinpoint and extract data form XML
 documents [#j1]_.
 
+Mapping Attributes with XPath
+.............................
+
 In the table below, we replace line numbers with XPaths into the SAML
-Assertion that contains the exact data Rackspace Identity needs.
+Assertion.
 
 .. include:: tables/xpath.rst
+
+We can easily turn this table into an attribute mapping policy:
+
+.. map:: mapping-rule-exp/mapping-rule-exp-xpth.yaml
+
+Let's walk through the policy above in detail and examine how XPath is
+used to extract the attribute values.
+
+Parts of the Mapping Policy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The mapping policy is YAML document that contains instructions aimed
+at retrieving (or deriving) identity attributes from a SAML
+Assertion. You can think of it as a simple script that executes every
+time a SAML Assertion is presented to Rackspace Identity. In this
+section, we break the mapping policy above into its relevant parts.
+
+mapping (2):
+  The mapping policy is always contained in a single top-level
+  ``mapping`` object.
+
+version (3):
+  The ``version`` key identifies the version of the mapping policy
+  language.  It is a required attribute and should always have the
+  value of ``RAX-1``. The mapping policy language described here is
+  based on the `Mapping Combinations`_ language by the OpenStack
+  Keystone and the version name is used to differentiate a Rackspace
+  Identity mapping policy from a Keystone mapping policy.
+
+description (4):
+  The ``description`` key provides a human readable description of the
+  mapping policy. This description is optional.
+
+rules (6):
+  A mapping policy is made up of a collection of rules. These rules
+  are encapsulated by the ``rules`` array.  A policy is required to
+  contain at least one rule.
+
+rule (7-13):
+  Lines 7-13 contain a rule that drives the policy. A rule may contain
+  a ``local`` and a ``remote`` section.  Both ``local`` and ``remote``
+  sections are optional (in this case, we don't need a ``remote``),
+  however, there should be at least one rule with a ``local`` section.
+
+  It's important to note that things are local or remote from the
+  perspective of Rackspace Identity. For example, the ``local``
+  section contains statements about the user within Rackspace Identity
+  (the local user).  The remote section contains statements about the
+  user as its presented by the IDP (the remote user).
+
+  Lines 8-13 describe what the local user should look like -- in other
+  words they describe the attributes of the local user. Here, we
+  specify each of the required identity attributes and describe how
+  they can be obtained from an XPath.
+
 
 .. References:
 
@@ -219,6 +277,8 @@ Assertion that contains the exact data Rackspace Identity needs.
    http://developer.rackspace.com/docs/rackspace-federation/docs/attribmapping-basics/full-roles.html
 .. _ISO 8601:
    https://en.wikipedia.org/wiki/ISO_8601
+.. _Mapping Combinations:
+   https://docs.openstack.org/keystone/latest/advanced-topics/federation/mapping_combinations.html
 
 .. Footnotes:
 
