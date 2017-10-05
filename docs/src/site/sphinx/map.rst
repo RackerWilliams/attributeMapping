@@ -168,7 +168,7 @@ In the SAML Assertion above an expire timestamp is specified in the
 In SAML, this attribute is meant to denote the time after which the
 SAML Assertion should no longer be considered valid. While this
 timestamp does not fit semantically with the expire attribute that
-Rackspace Identity expects it still works as a reasonable timestamp.
+Rackspace Identity expects it still works as a reasonable default.
 
 Other Attributes
 ................
