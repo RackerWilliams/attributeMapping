@@ -344,6 +344,28 @@ We can rewrite the mapping policy using this function as follows:
 
 .. map:: mapping-rule-exp/mapping-rule-exp-xpth-3.yaml
 
+Using the {Ats()} and {At()} Substitutions
+..........................................
+
+Having an XPath function that retrieves SAML attribute values is handy
+when you want to process those values in some way before returning a
+result.  In some cases, however, you simply want to return the value
+(or values) of a SAML attribute as is. The ``{Ats()}`` and ``{At()}``
+substitutions, do just that. These are known as attribute
+substitutions. As with their XPath counterparts, the ``{Ats()}``
+substitution returns all values for a specific attribute name and the
+``{At()}``.
+
+Given these substitutions we can rewrite the policy as follows:
+
+.. map:: mapping-rule-exp/mapping-rule-exp-xpth-4.yaml
+
+Notice that in this case the name of the attribute is not in single
+quotes. We are no longer directly using XPath with attribute
+substitutions, although, under the hood, these substitutions are also
+interpreted as XPath statements.
+
+
          
 .. References:
 
