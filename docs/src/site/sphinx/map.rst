@@ -180,18 +180,59 @@ consult the `Rackspace Identity Federation User Guide`_ for details on
 these attributes.
 
 
-A simple Attribute Mapping Policy
----------------------------------
+Mapping Attributes
+------------------
 
-Local
-.....
+So far, we've broken down the SAML Assertion and identified places
+where we can find values for the 5 attributes that Rackspace Identity
+requires.  This is summarized in the table below:
 
-Remote
-......
+.. list-table::
+  :header-rows: 1
 
+  * - Attribute
+    - SAML Assertion Location (line number(s))
+  * - Domain
+    - 74-76
+  * - Name
+    - 59
+  * - Email
+    - 77-79
+  * - Roles
+    - 71-73
+  * - Expire
+    - 61
 
-XPath vs Attribute Names
-------------------------
+In a sense, this table represents an attribute mapping.  We are
+mapping data located in the SAML Assertion into attributes that
+Rackspace Identity requires to log in a federated user.  This is a
+silly mapping, however, because mapping attributes by referring to
+line numbers is extremely unpractical, inexact, and brittle. Using
+XPath, on the other hand, is a more stable and practical way of
+pinpointing the exact location of the data that we need. After all,
+XPath was designed specifically to pinpoint and extract data form XML
+documents [#j1]_.
+
+In the table below, we replace line numbers with XPaths into the SAML
+Assertion that contains the exact data Rackspace Identity needs.
+
+.. list-table::
+  :widths: 11 87
+  :header-rows: 1
+
+  * - Attribute
+    - SAML Assertion Location (XPath)
+  * - Domain
+    - //saml2:Attribute[@Name='domain']/saml2:AttributeValue[1]
+  * - Name
+    - //saml2:Subject/saml2:NameID
+  * - Email
+    - //saml2:Attribute[@Name='email']/saml2:AttributeValue[1]
+  * - Roles
+    - //saml2:Attribute[@Name='roles']/saml2:AttributeValue
+  * - Expire
+    - //saml2:Subject/saml2:SubjectConfirmation/saml2:SubjectConfirmationData/@NotOnOrAfter
+
 
 .. References:
 
@@ -201,3 +242,8 @@ XPath vs Attribute Names
    http://developer.rackspace.com/docs/rackspace-federation/docs/attribmapping-basics/full-roles.html
 .. _ISO 8601:
    https://en.wikipedia.org/wiki/ISO_8601
+
+.. Footnotes:
+
+.. [#j1] Later versions of XPath allow extracting data from JSON
+         documents as well!
