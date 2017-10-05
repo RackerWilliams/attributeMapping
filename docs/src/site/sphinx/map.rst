@@ -273,7 +273,38 @@ Using XPath in the Mapping Policy
 
 You'll note that the XPaths in the mapping policy are contained within
 something that looks like this ``{Pts()}`` |---| this is known as an
-XPath substitution. 
+XPath substitution. There are various types of substitutions in the
+mapping policy language each of which is encapsulated by curly braces
+``{}``. Substitutions are only allowed in the local part of the
+mapping policy, they help set values for local attributes in that they
+are always replaced (or substituted) by other content. In the case of
+the XPath substitution it is replaced by the result of the XPath
+within the parenthesis when executed against the SAML Assertion.
+
+It is important to note that spaces matter in a substitution.  In
+order to be interpreted correctly there should be no spaces between
+the prologue of the substitution ``{Pts(`` and the epilogue of the
+substitution ``)}``.
+
+.. include:: tables/pts.rst
+
+You'll notice that the XPath substitution refers to elements in
+certain namespaces (``saml2p``, ``saml2``). These namespace prefixes,
+which are common to SAML, are always predefined. The table below
+describes how namespace prefixes are mapped by default:
+
+.. include:: tables/namespaces.rst
+
+It is possible for a SAML Assertion to refer to elements in extended
+namespaces not listed here. You can define additional prefixes by
+adding a ``namespaces`` key to the mapping policy. In XPath, it's the
+namespace URI that uniquely identifies an element |---| the prefix is
+simply a short had for this URI.  In the example below, we replace the
+``saml2p`` prefix with ``foo``. Because the namespace URI bound to
+element is the same as the previous example the two mapping policies
+will produce the exact same result.
+
+.. map:: mapping-rule-exp/mapping-rule-exp-xpth-6.yaml
 
 
 .. References:
