@@ -25,7 +25,7 @@ below:
 
 The assertion describes a view of the user that has successfully
 logged in. It contains within it all of the information deemed by the
-IDP to be relevant to the Service Provider (the SP -- which in this
+IDP to be relevant to the Service Provider (the SP |---| which in this
 case is Rackspace).
 
 .. note::
@@ -47,26 +47,26 @@ Issuer (37):
   The issuer is the system that generated (or issued) the assertion.
   This is identified as a URI.
 
-Signature (38-57):
+Signature (38 |--| 57):
   The XML Signature of the assertion part of the request. The
   signature is used to verify that that the assertion was indeed
   produced by the issuer.
 
-Subject (58-63):
+Subject (58 |--| 63):
   The subject is used to identify the identity (or user) that the
   assertion is about.
 
-AuthnStatement (64-69):
+AuthnStatement (64 |--| 69):
   The AuthnStatement contains details on how the subject
   authenticated.
 
-AttributeStatement (70-91):
+AttributeStatement (70 |--| 91):
   This section contains a list of arbitrary attributes associated with
   the subject.  Each attribute in the list is essentially a name/value
   pair.  Note, that values are of a type identified by the
-  ``xsi:type`` XML attribute -- in this case they are all strings.
+  ``xsi:type`` XML attribute |---| in this case they are all strings.
   Also note, that attributes may have multiple values.  The groups
-  attribute defined in 80-84, for example, contains 3 separate values
+  attribute defined in 80 |--| 84, for example, contains 3 separate values
   (group1, group2, and group3).
 
 Signing SAML Assertions
@@ -107,7 +107,7 @@ allowed to create multiple domains and Rackspace Identity needs to
 place the federated user in the correct one.
 
 In the SAML Assertion above the domain is passed as a SAML attribute
-in lines 74-76. This implies that the identity provider was
+in lines 74 |--| 76. This implies that the identity provider was
 pre-configured to emit the correct value. It is not strictly required
 that IDP do this since most federated users target a single domain and
 the domain value can be easily hard coded in an attribute mapping
@@ -131,7 +131,7 @@ Email
 
 This is the email of the federated user.  In the SAML assertion it is
 identified as an attribute in the AttributeStatement section (lines
-77-79). Some IDPs will make no distinction between a username and an
+77 |--| 79). Some IDPs will make no distinction between a username and an
 email, in which case the email will be located in the Subject section.
 
 Roles
@@ -144,9 +144,9 @@ only allows roles that it recognizes to be assigned.  See the
 of allowed roles`_.
 
 In the SAML Assertion above the list of roles is specified in an
-attribute named ``roles`` on lines 71-73.  Note that this is a good
-use case for a multi-value attribute, but in this case we only assign
-the ``nova:admin`` role.
+attribute named ``roles`` on lines 71 |--| 73.  Note that this is a
+good use case for a multi-value attribute, but in this case we only
+assign the ``nova:admin`` role.
 
 Expire
 ......
@@ -251,8 +251,8 @@ rules (6):
   are encapsulated by the ``rules`` array.  A policy is required to
   contain at least one rule.
 
-rule (7-13):
-  Lines 7-13 contain a rule that drives the policy. A rule may contain
+rule (7 |--| 13):
+  Lines 7 |--| 13 contain a rule that drives the policy. A rule may contain
   a ``local`` and a ``remote`` section.  Both ``local`` and ``remote``
   sections are optional (in this case, we don't need a ``remote``),
   however, there should be at least one rule with a ``local`` section.
@@ -263,10 +263,17 @@ rule (7-13):
   (the local user).  The remote section contains statements about the
   user as its presented by the IDP (the remote user).
 
-  Lines 8-13 describe what the local user should look like -- in other
+  Lines 8 |--| 13 describe what the local user should look like |---| in other
   words they describe the attributes of the local user. Here, we
   specify each of the required identity attributes and describe how
   they can be obtained from an XPath.
+
+Using XPath in the Mapping Policy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You'll note that the XPaths in the mapping policy are contained within
+something that looks like this ``{Pts()}`` |---| this is known as an
+XPath substitution. 
 
 
 .. References:

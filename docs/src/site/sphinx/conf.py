@@ -75,7 +75,10 @@ rst_epilog = """
 
 .. |service| replace:: Rackspace Identity Federation
 .. |product name| replace:: Attribute Mapping Policy Reference
-
+.. |--| unicode:: U+2013 .. en dash
+   :trim:
+.. |---| unicode:: U+2014 .. em dash
+   :trim:
 """
 
 # The version info for the project you're documenting, acts as replacement for
