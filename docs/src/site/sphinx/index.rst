@@ -20,8 +20,8 @@
    specify anything about the result of the mapping, the directive
    will show the resulting attributes.
 
-   You can specify a caption on the SAML response and the policy file,
-   as well as emphasize lines in the examples:
+   You can specify a caption on the SAML response, the policy file,
+   and the results. You can also emphasize lines in the examples:
 
    .. attribmap:: defaults
       :saml: sample_assert.xml
@@ -30,6 +30,7 @@
       :map: defaults.yaml
       :map-caption: Default Mapping Policy
       :map-emphasize-lines: 3-7
+      :results-caption: Resultning attributes
 
    Finally, you can suppress the output of the SAML response, the
    policy file or the results.  For example, if you only want to show

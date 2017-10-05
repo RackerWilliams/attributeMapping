@@ -71,6 +71,7 @@
         <xsl:param name="testCase" as="xs:string"/>
         <xsl:param name="saml" as="xs:string"/>
         <xsl:param name="map" as="xs:string"/>
+        <xsl:variable name="caption"   as="node()?" select="rstd:getField(.,'results-caption')"/>
         <xsl:variable name="resultName" as="xs:string"
                       select="if (not(ends-with($map,'.xml'))) then concat($map,'.xml') else $map"/>
         <xsl:variable name="result" as="node()"
@@ -78,7 +79,14 @@
         <xsl:variable name="rows" as="node()*">
             <xsl:apply-templates select="$result" mode="result"/>
         </xsl:variable>
-        <paragraph>Resulting Attributes:</paragraph>
+        <paragraph>
+            <xsl:choose>
+                <xsl:when test="exists($caption)">
+                    <xsl:value-of select="$caption"/>
+                </xsl:when>
+                <xsl:otherwise>Resulting Attributes:</xsl:otherwise>
+            </xsl:choose>
+        </paragraph>
         <table>
             <tgroup cols="2">
                 <colspec colwidth="{max(for $p in $rows/entry[1]/paragraph return string-length($p)+2)}"/>
