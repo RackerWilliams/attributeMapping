@@ -9,8 +9,8 @@ well known identity attributes from a signed SAML assertion produced
 by an Identity Service Provider (IDP).  We'll begin this section by
 looking at a sample SAML assertion in detail, we'll then describe the
 attributes that identity needs to extract from the assertion in order
-to operate, and we'll wrap up by looking at a mapping policy that
-extracts those attributes from the assertion.
+to operate, and we'll wrap up by walking through the construction of a
+mapping policy that extracts those attributes from the assertion.
 
 
 The SAML Assertion
