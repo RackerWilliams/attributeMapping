@@ -187,21 +187,7 @@ So far, we've broken down the SAML Assertion and identified places
 where we can find values for the 5 attributes that Rackspace Identity
 requires.  This is summarized in the table below:
 
-.. list-table::
-  :header-rows: 1
-
-  * - Attribute
-    - SAML Assertion Location (line number(s))
-  * - Domain
-    - 74-76
-  * - Name
-    - 59
-  * - Email
-    - 77-79
-  * - Roles
-    - 71-73
-  * - Expire
-    - 61
+.. include:: tables/loc.rst
 
 In a sense, this table represents an attribute mapping.  We are
 mapping data located in the SAML Assertion into attributes that
@@ -216,23 +202,7 @@ documents [#j1]_.
 In the table below, we replace line numbers with XPaths into the SAML
 Assertion that contains the exact data Rackspace Identity needs.
 
-.. list-table::
-  :widths: 11 87
-  :header-rows: 1
-
-  * - Attribute
-    - SAML Assertion Location (XPath)
-  * - Domain
-    - //saml2:Attribute[@Name='domain']/saml2:AttributeValue[1]
-  * - Name
-    - //saml2:Subject/saml2:NameID
-  * - Email
-    - //saml2:Attribute[@Name='email']/saml2:AttributeValue[1]
-  * - Roles
-    - //saml2:Attribute[@Name='roles']/saml2:AttributeValue
-  * - Expire
-    - //saml2:Subject/saml2:SubjectConfirmation/saml2:SubjectConfirmationData/@NotOnOrAfter
-
+.. include:: tables/xpath.rst
 
 .. References:
 
