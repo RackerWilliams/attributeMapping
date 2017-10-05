@@ -134,4 +134,13 @@
     <xsl:template match="rstd:content">
         <xsl:value-of select="."/>
     </xsl:template>
+
+    <!-- Re-add disabled directives -->
+    <xsl:template match="system_message[@level=2 and @type='WARNING'
+                         and contains(paragraph,'directive disabled')]">
+        <xsl:variable name="directiveText" as="xs:string" select="literal_block"/>
+        <xsl:text>&CR;</xsl:text>
+        <xsl:value-of select="$directiveText"/>
+        <xsl:text>&CR;</xsl:text>
+    </xsl:template>
 </xsl:stylesheet>
