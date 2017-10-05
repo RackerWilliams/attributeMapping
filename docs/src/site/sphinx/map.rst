@@ -306,6 +306,27 @@ will produce the exact same result.
 
 .. map:: mapping-rule-exp/mapping-rule-exp-xpth-6.yaml
 
+Using the {Pt()} Substitution
+.............................
+
+Notice that the XPath for retrieving the domain ends with
+``saml2:AttributeValue[1]`` while the XPath for retrieving the list of
+roles ends ``saml2:AttributeValue``.  This is because we want a single
+value for a domain, but we want a list of roles.  Without the ``[1]``
+the XPath would return every ``AttributeValue`` in a SAML Assertion
+for a domain |---| the ``[1]`` signifies that we are only interested
+in the first value we find [#j2]_.
+
+Because it is common to want to retrieve a single value, there's an
+alternative XPath substitution (``{Pt()}``) that always returns the
+first value of an XPath result. This is useful in cases where we
+expect a single value and we want to automatically protect against the
+off chance that we'll receive multiple values in a SAML assertion.
+
+Given this new substitution, we can rewrite the mapping policy as
+follows:
+
+.. map:: mapping-rule-exp/mapping-rule-exp-xpth-2.yaml
 
 .. References:
 
@@ -322,3 +343,5 @@ will produce the exact same result.
 
 .. [#j1] Later versions of XPath allow extracting data from JSON
          documents as well!
+.. [#j2] The first index in XPath is 1 not 0.  This logical and makes
+         sense unless you're a software developer.
