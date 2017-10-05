@@ -84,7 +84,20 @@
                 <colspec colwidth="{max(for $p in $rows/entry[1]/paragraph return string-length($p)+2)}"/>
                 <colspec colwidth="{max(for $p in $rows/entry[2]/paragraph return string-length($p)+2)}"/>
                 <tbody>
-                    <xsl:copy-of select="$rows"/>
+                    <!--
+                        Make sure we get the standard rows in the
+                        right order.
+                    -->
+                    <xsl:copy-of select="$rows[entry[1]='domain']"/>
+                    <xsl:copy-of select="$rows[entry[1]='name']"/>
+                    <xsl:copy-of select="$rows[entry[1]='email']"/>
+                    <xsl:copy-of select="$rows[entry[1]='roles']"/>
+                    <xsl:copy-of select="$rows[entry[1]='expire']"/>
+                    <!--
+                        Then copy all extended attributes in the order in
+                        which they naturally appear.
+                    -->
+                    <xsl:copy-of select="$rows[not(entry[1]=('domain','name','email','roles','expire'))]"/>
                 </tbody>
             </tgroup>
         </table>
