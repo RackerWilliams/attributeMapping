@@ -328,6 +328,23 @@ follows:
 
 .. map:: mapping-rule-exp/mapping-rule-exp-xpth-2.yaml
 
+
+Using the mapping:get-attributes Call
+.....................................
+
+At this point, the XPaths for retrieving a domain, email, and roles
+all look almost exactly the same as each other. They are all
+retrieving the list of values for an attribute in the
+``AttributeStatement`` of the assertion by name.  Because this is a
+common case, there is a predefined XPath function called
+``mapping:get-attributes`` that takes the name of a SAML attribute as
+a string, and returns the attribute values associated with that name.
+
+We can rewrite the mapping policy using this function as follows:
+
+.. map:: mapping-rule-exp/mapping-rule-exp-xpth-3.yaml
+
+         
 .. References:
 
 .. _Rackspace Identity Federation User Guide:
