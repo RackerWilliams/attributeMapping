@@ -365,7 +365,36 @@ quotes. We are no longer directly using XPath with attribute
 substitutions, although, under the hood, these substitutions are also
 interpreted as XPath statements.
 
+Using the {D} Substitution
+..........................
 
+There are certain default places where a mapping policy may look for a
+particular identity attribute value. The default substitution
+(``{D}``) is always replaced with the value at the default
+location. Unlike other substitutions the default substitution is
+interpreted differently depending on where the substitution is
+placed. For example, if the substitution is placed as a value of the
+``name`` attribute it will replace itself with the default value for
+name. Likewise, if ``{D}`` is placed in the ``email`` attribute it
+will be replaced with the default value for email and so on.
+
+What are the default locations in a SAML assertion for the five
+attributes Rackspace Identity expects?  It turns out that the SAML
+assertion in this chapter has all of the values in the default places!
+So it's possible, in this case, to write a mapping policy that looks
+like this:
+
+.. map:: mapping-rule-exp/mapping-rule-exp-xpth-5.yaml
+
+Next Steps
+----------
+
+So far we've learned about the SAML Assertions and seen how to use
+XPath, attribute names, and expected defaults to write mapping
+polices.  All of the polices we've created, however, have described
+simple direct mappings. In the chapters that follow we'll start
+looking at writing polices in cases where things don't align so
+perfectly.
          
 .. References:
 
