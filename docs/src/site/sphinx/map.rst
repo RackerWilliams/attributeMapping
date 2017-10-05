@@ -401,7 +401,7 @@ perfectly.
 .. _Rackspace Identity Federation User Guide:
    http://developer.rackspace.com/docs/rackspace-federation
 .. _list of allowed roles:
-   http://developer.rackspace.com/docs/rackspace-federation/docs/attribmapping-basics/full-roles.html
+   https://developer.rackspace.com/docs/rackspace-federation/attribmapping-basics/full-roles/
 .. _ISO 8601:
    https://en.wikipedia.org/wiki/ISO_8601
 .. _Mapping Combinations:
