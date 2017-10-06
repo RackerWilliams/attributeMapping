@@ -37,7 +37,7 @@ Mixing in non-default attributes
    :map: defaults4-s.yaml
 
 
-Working with exirations
+Working with expiration
 -----------------------
 
 Hard coding a 2 hour expiration date
