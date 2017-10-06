@@ -26,7 +26,7 @@
 <!-- The user/ext should match set values -->
 <?assert every $v in ('value1','value2','value with space3','value4') satisfies $v=mapping:get-attributes('extGroup/ext2')?>
 
-<saml2p:Response ID="_7fcd6173-e6e0-45a4-a2fd-74a4ef85bf30" IssueInstant="2015-12-04T15:47:15.057Z" Version="2.0" xmlns:saml2p="urn:oasis:names:tc:SAML:2.0:protocol" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<saml2p:Response ID="_7fcd6173-e6e0-45a4-a2fd-74a4ef85bf30" IssueInstant="2017-11-15T16:19:06.310Z" Version="2.0" xmlns:saml2p="urn:oasis:names:tc:SAML:2.0:protocol" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <saml2:Issuer xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">http://test.rackspace.com</saml2:Issuer>
     <saml2p:Status>
         <saml2p:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/>
