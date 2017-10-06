@@ -40,20 +40,11 @@ Mixing in non-default attributes
 Working with expiration
 -----------------------
 
-Hard coding a 2 hour expiration date
-....................................
-
-.. attribmap:: mapping-rule-exp
-   :saml: sample_assert.xml
-   :map: mapping-rule-exp.yaml
-
-
 Working with lists
 ------------------
          
 Black lists
 ...........
-
 
 White lists
 ...........
