@@ -1,11 +1,12 @@
 ---
 mapping:
+  version: RAX-1
   rules:
   - local:
       user:
         domain: "{D}"
-        name: "{D}"
-        email: "{D}"
-        roles: "{D}"
+        name:   "{D}"
+        email:  "{D}"
+        roles:  "{D}"
         expire: "{D}"
-  version: RAX-1
+
