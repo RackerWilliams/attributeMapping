@@ -68,10 +68,24 @@ project = u'Attribute Mapping Policy Reference'
 copyright = u'2017, Rackspace'
 author = u'Rackspace'
 
+draft_warning = """
+
+.. important::
+
+ This document in a **DRAFT**. The information contained herein is
+ subject to change.
+
+
+"""
+
+rst_prolog = draft_warning
+
 # Global variables that are replaced by the specified value during the build
 # process.
 
 rst_epilog = """
+
+{0}
 
 .. |service| replace:: Rackspace Identity Federation
 .. |product name| replace:: Attribute Mapping Policy Reference
@@ -79,7 +93,7 @@ rst_epilog = """
    :trim:
 .. |---| unicode:: U+2014 .. em dash
    :trim:
-"""
+""".format(draft_warning)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
