@@ -15,5 +15,5 @@
         We use comments and processing instructions for testing,
         and that can confuse folks so get those out.
      -->
-    <xsl:template match="comment() | processing-instruction()"/>
+    <xsl:template match="comment() | processing-instruction()" priority="2"/>
 </xsl:stylesheet>
